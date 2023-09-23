@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="#" class="navbar-brand">Company<b>Name</b></a>
+    <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+
+        <div class="navbar-nav ml-auto action-buttons" *ngIf="!isAuth">
+            <div class="nav-item dropdown">
+                <a data-toggle="modal" data-target="#loginModal" href="#loginModal"
+                    class="nav-link dropdown-toggle mr-4">Login</a>
+            </div>
+            <div class="nav-item dropdown">
+                <a data-toggle="modal" data-target="#registerModal" href="#registerModal"
+                    class="btn btn-primary dropdown-toggle sign-up-btn">Sign up</a>
+            </div>
+        </div>
+        <div class="navbar-nav ml-auto action-buttons" *ngIf="isAuth">
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle mr-4">{{currentUser.userName | titlecase}}</a>
+            </div>
+            <div class="nav-item dropdown">
+                <a (click)="logout()" href="javascript:void(0)"
+                    class="btn btn-primary dropdown-toggle sign-up-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-title text-center">
+                    <h4>Login</h4>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <form class="action-form" [formGroup]="loginForm">
+                        <div class="form-group">
+                            <input type="text" formControlName="userName" class="form-control" id="useraname123"
+                                placeholder="Your user name...">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" formControlName="password" class="form-control" id="password1"
+                                placeholder="Your password...">
+                        </div>
+                        <button type="button" [disabled]="!loginForm.valid" (click)="login()"
+                            class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-title text-center">
+                    <h4>Fill in this form to create your account!</h4>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <form class="action-form" [formGroup]="registerForm">
+                        <div class="form-group">
+                            <input type="text" formControlName="userName" class="form-control" id="username1"
+                                placeholder="Your user name...">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" formControlName="password" class="form-control" id="password12"
+                                placeholder="Your password...">
+                        </div>
+                        <button type="button" (click)="register()" [disabled]="!registerForm.valid"
+                            class="btn btn-primary btn-block">Sign Up
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="success" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="border:none;border-radius: 5px;padding: 0rem;">
+            <div class="modal-header"
+                style="background: #1ab394; border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                <button type="button" class="close" (click)="hideSuccessModal()"
+                    style="opacity:1;color:#fff;margin: -1rem -24rem -1rem auto;z-index: 9;">&times;</button>
+                <h4 class="modal-title text-center" style="width: 100%;">
+                    <img src="https://lh3.googleusercontent.com/-Zxh4srAEtU0/Wp0cZV-PJuI/AAAAAAAAD4E/En5x5c53s44jzvG8M0sSyFZXoRhGXfBzwCL0BGAYYCw/h100/2018-03-05.png"
+                        alt="">
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:center;color:#1ab394;font-size:24px;font-weight:500;">
+                    {{message}}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="fail" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="border:none;border-radius: 5px;padding: 0rem;">
+            <div class="modal-header"
+                style="background: #d75a4a;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                <button type="button" class="close" (click)="hideFailModal()"
+                    style="opacity:1;color:#fff;margin: -1rem -24rem -1rem auto;z-index: 9;">&times;</button>
+                <h4 class="modal-title text-center" style="width: 100%;">
+                    <img src="https://lh3.googleusercontent.com/-ApBj8d4WL1E/Wp0fJeAD6jI/AAAAAAAAD4M/Dh6l_UiA64kln8PS-1SaDQFuhb9KJL40gCL0BGAYYCw/h100/2018-03-05.png"
+                        alt="">
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:center;color:#d75a4a;font-size:24px;font-weight:500;">
+                    {{message}}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

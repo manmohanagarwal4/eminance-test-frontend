@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div id="main">
+    <div class="container" style="padding-top: 20px;">
+        <div class="accordion productAccor" id="product">
+            <div class="card" *ngFor="let product of products; let i=index">
+                <div class="card-header" id="producthead{{i}}">
+                    <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" [attr.data-target]="'#product'+i"
+                        aria-expanded="true" [attr.aria-controls]="'product'+i">{{product.category}}</a>
+                </div>
+
+                <div id="product{{i}}" class="collapse" [attr.aria-labelledby]="'producthead'+i" data-parent="#product">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4" style="padding-bottom: 15px;" *ngFor="let item of product.products">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{item.thumbnail}}" class="card-img-top" alt="{{item.title}}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{item.title}}</h5>
+                                        <p class="card-text">{{item.price}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
