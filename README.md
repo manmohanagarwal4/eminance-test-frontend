@@ -4,7 +4,7 @@ Before you begin, ensure you have met the following requirements:
 
 - [Node.js](https://nodejs.org/) installed (at least version 16.13.x or higher)
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) package manager installed
-- [Angular] This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+- [Angular](https://github.com/angular/angular-cli) This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
 ## Development server
 
